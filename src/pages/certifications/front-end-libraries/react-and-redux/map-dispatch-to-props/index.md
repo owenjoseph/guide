@@ -3,8 +3,31 @@ title: Map Dispatch to Props
 ---
 ## Map Dispatch to Props
 
-This is a stub. <a href='https://github.com/freecodecamp/guides/tree/master/src/pages/certifications/front-end-libraries/react-and-redux/map-dispatch-to-props/index.md' target='_blank' rel='nofollow'>Help our community expand it</a>.
+`mapDispatchToProps()` needs to be defined as a function that takes `dispatch` as an argument. The `mapDispatchToProps()` function needs to `return` an object with one paramenter, in this case, the parameter name will be `submitNewMessage`:
 
-<a href='https://github.com/freecodecamp/guides/blob/master/README.md' target='_blank' rel='nofollow'>This quick style guide will help ensure your pull request gets accepted</a>.
+```
+const mapDispatchToProps = dispatch => {
+  return {
+    submitNewMessage: }
+  }
+}
+```
 
-<!-- The article goes here, in GitHub-flavored Markdown. Feel free to add YouTube videos, images, and CodePen/JSBin embeds  -->
+Now the value of the `submitNewMessage` needs to be set to the dispatch function, which itself needs to take the actionCreator data payload – defined at the top of this challenge's code as `message` – as an argument. This can be be written as an anonymous function which invokes the previously defined `addMessage()` actionCreator, passing it the `message` argument (which varies slightly in style from the example given in the challenge description):
+
+```
+message => { dispatch(addMessage(message)) }
+```
+
+## Solution
+The full `mapDispatchToProps()` function ends up looking like:
+
+```
+const mapDispatchToProps = dispatch => {
+  return {
+    submitNewMessage: message => { dispatch(addMessage(message)) }
+  }
+}
+```
+
+This grants access to the action creator via a given React component's props.
